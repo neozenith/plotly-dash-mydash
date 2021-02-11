@@ -1,5 +1,6 @@
 dash
 flake8-docstrings
+pandas
 pip-api
 pip-chill
 pipreqs
@@ -38,26 +39,29 @@ pytest-xdist
 # markupsafe # Installed as dependency for jinja2
 # mccabe # Installed as dependency for flake8
 # mypy # Installed as dependency for pytest-mypy
-# mypy-extensions # Installed as dependency for black, mypy
+# mypy-extensions # Installed as dependency for mypy, black
+# numpy # Installed as dependency for pandas
 # packaging # Installed as dependency for pytest
 # pathspec # Installed as dependency for black
 # plotly # Installed as dependency for dash
 # pluggy # Installed as dependency for pytest
-# py # Installed as dependency for pytest, pytest-forked
+# py # Installed as dependency for pytest-forked, pytest
 # pycodestyle # Installed as dependency for flake8
 # pydocstyle # Installed as dependency for flake8-docstrings
 # pyflakes # Installed as dependency for flake8
 # pyparsing # Installed as dependency for packaging
-# pytest # Installed as dependency for pytest-forked, pytest-black, pytest-flake8, pytest-randomly, pytest-xdist, pytest-mypy, pytest-cov
+# pytest # Installed as dependency for pytest-randomly, pytest-forked, pytest-black, pytest-mypy, pytest-xdist, pytest-flake8, pytest-cov
 # pytest-forked # Installed as dependency for pytest-xdist
+# python-dateutil # Installed as dependency for pandas
+# pytz # Installed as dependency for pandas
 # regex # Installed as dependency for black
 # requests # Installed as dependency for yarg
 # retrying # Installed as dependency for plotly
-# six # Installed as dependency for plotly, retrying
+# six # Installed as dependency for python-dateutil, retrying, plotly
 # snowballstemmer # Installed as dependency for pydocstyle
-# toml # Installed as dependency for pytest, black, pytest-black
-# typed-ast # Installed as dependency for black, mypy
-# typing-extensions # Installed as dependency for black, mypy
+# toml # Installed as dependency for pytest-black, pytest, black
+# typed-ast # Installed as dependency for mypy, black
+# typing-extensions # Installed as dependency for mypy, black
 # urllib3 # Installed as dependency for requests
 # werkzeug # Installed as dependency for flask
 # yarg # Installed as dependency for pipreqs

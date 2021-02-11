@@ -51,10 +51,6 @@ omit = [
   'test/',
 ]
 
-[tool.flake8]
-max-line-length = 120
-max-complexity = 10
-
 [tool.isort]
 profile = "black"
 multi_line_output = 3
