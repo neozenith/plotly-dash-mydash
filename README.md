@@ -17,7 +17,7 @@ pip install -r requirements.txt
 
 ```toml
 [tool.black]
-line-length = 120
+line-length = 110
 
 [tool.pytest.ini_options]
 minversion = "6.0"
@@ -54,7 +54,7 @@ omit = [
 [tool.isort]
 profile = "black"
 multi_line_output = 3
-line_length = 120
+line_length = 110
 import_heading_stdlib='Standard Library'
 import_heading_thirdparty='Third Party Libraries'
 import_heading_firstparty='Our Libraries'
