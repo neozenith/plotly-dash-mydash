@@ -76,7 +76,10 @@ def flatten_json_leaves(json_obj):
     # Handle the case where the root document is coming from jsonl generator
     _json_obj = json_obj
     if isinstance(json_obj, GeneratorType):
-        _json_obj = next(json_obj)
+        try:
+            _json_obj = next(json_obj)
+        except StopIteration as si:
+            return
 
     if type(_json_obj) == dict:
         for k, v in _json_obj.items():
