@@ -12,6 +12,7 @@ addopts = '''
   --black
   --flake8
   --isort
+  --mypy
 
   --junitxml=junit/test-results.xml
 
@@ -41,16 +42,3 @@ import_heading_stdlib='Standard Library'
 import_heading_thirdparty='Third Party Libraries'
 import_heading_firstparty='Our Libraries'
 
-[tool.mypy]
-mypy_path = 'mydash'
-check_untyped_defs = true
-disallow_any_generics = true
-ignore_missing_imports = true
-no_implicit_optional = true
-show_error_codes = true
-strict_equality = true
-warn_redundant_casts = true
-warn_return_any = true
-warn_unreachable = true
-warn_unused_configs = true
-no_implicit_reexport = true

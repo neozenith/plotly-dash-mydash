@@ -9,9 +9,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 import numpy as np
 import plotly.express as px
+from dash.dependencies import Input, Output
 from dash_html_components import H1, H2, H3, Div, P
-from dash.dependencies import Output, Input
-
 
 from .data import get_dataframes, list_assets
 
@@ -26,7 +25,7 @@ assets = {}
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 
-def dashboard(datapath):
+def dashboard(datapath: str) -> dash.Dash:
     """Create Plotly Dash App."""
     assets.update({asset_name: files for (asset_name, files) in list_assets(datapath)})
     app.layout = _set_layout(assets)

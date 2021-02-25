@@ -5,6 +5,7 @@ import json
 import os
 import pathlib
 from types import GeneratorType
+from typing import Any, Dict, List
 
 # Third Party Libraries
 import pandas as pd
@@ -48,7 +49,7 @@ def list_files(datapath):
 
 def groupby(iterator, group_fun, map_fun=None):
     """Generate a dict from an iterable, using group_fun to specify the grouping key."""
-    output = {}
+    output: Dict[str, List[Any]] = {}
     for x in iterator:
         k = group_fun(x)
         _x = map_fun(x) if map_fun else x
@@ -78,7 +79,7 @@ def flatten_json_leaves(json_obj):
     if isinstance(json_obj, GeneratorType):
         try:
             _json_obj = next(json_obj)
-        except StopIteration as si:
+        except StopIteration:
             return
 
     if type(_json_obj) == dict:
