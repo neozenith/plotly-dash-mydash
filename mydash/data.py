@@ -50,13 +50,13 @@ def list_files(datapath):
 def groupby(iterator, group_fun, map_fun=None):
     """Generate a dict from an iterable, using group_fun to specify the grouping key."""
     output: Dict[str, List[Any]] = {}
-    for x in iterator:
-        k = group_fun(x)
-        _x = map_fun(x) if map_fun else x
+    for v in iterator:
+        k = group_fun(v)
+        _v = map_fun(v) if map_fun else v
         if k in output:
-            output[k].append(_x)
+            output[k].append(_v)
         else:
-            output[k] = [_x]
+            output[k] = [_v]
     return output
 
 

@@ -12,7 +12,7 @@ import plotly.express as px
 from dash.dependencies import Input, Output
 from dash_html_components import H1, H2, H3, Div, P
 
-from .data import get_dataframes, list_assets
+from .data import get_dataframes, list_assets, groupby
 
 external_stylesheets = [
     {
@@ -66,18 +66,32 @@ def _generate_body(asset_name="", files=[]):
 
     elements.append(H2(" ".join(asset_name.split("-")).title()))
 
-    df_records = get_dataframes(files)
-    for df_rec in df_records:
-        # Header
-        record_path = df_rec["record_path"]
-        elements.append(H3(record_path))
+    df_records = groupby(get_dataframes(files), lambda x: ".".join(x["record_path"].split(".")[:-2]))
 
-        # Data Vis: Chart or Table
-        data = df_rec["data"]
-        if "value" in data.columns and _is_series_numeric(data["value"]) and "period" in data.columns:
-            elements.append(_generate_chart(data, asset_name + record_path))
-        else:
-            elements.append(_generate_table(data))
+    for k, recs in df_records.items():
+        # Header
+        if k == "period":
+            continue
+        elements.append(H3(k))
+        elements.append(Div(len(recs)))
+        data = None
+        if len(recs) == 1:
+            # Data Vis: Chart or Table
+            data = recs[0]["data"]
+        elif len(recs) == 2:
+            df_num_idx = 0 if _is_series_numeric(recs[0]["data"]["value"]) else 1
+            df_str_idx = 1 - df_num_idx
+
+            df_num = recs[df_num_idx]["data"]
+            df_str = _reshape_dataframe_narrow_to_wide(recs[df_str_idx]["data"])
+            join_keys = list(df_num.columns.intersection(df_str.columns))
+            data = df_str.join(df_num.set_index(join_keys), on=join_keys, how="outer")
+
+        if data is not None:
+            if "value" in data.columns and _is_series_numeric(data["value"]) and "period" in data.columns:
+                elements.append(_generate_chart(data, asset_name + k))
+            else:
+                elements.append(_generate_table(data))
 
     return elements
 
@@ -104,10 +118,12 @@ def _reshape_dataframe_narrow_to_wide(dataframe):
     df = dataframe.pivot(row_keys, col_keys).reset_index()
 
     # "pretty up" the column names stripping a layer of prior hierarchy
+    df.columns = [str(c) if type(c) == int else c for c in df.columns]
     df.columns = [
         ".".join(c[1:]).strip() if type(c) == tuple and len(c) > 1 and c[0] == "value" else c
         for c in df.columns
     ]
+    df.columns = ["".join(c).strip() if type(c) == tuple and len(c) > 1 else c for c in df.columns]
     return df
 
 
