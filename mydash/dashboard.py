@@ -12,7 +12,7 @@ import plotly.express as px
 from dash.dependencies import Input, Output
 from dash_html_components import H1, H2, H3, Div, P
 
-from .data import get_dataframes, list_assets, groupby
+from .data import get_dataframes, groupby, list_assets
 
 external_stylesheets = [
     {
